@@ -12,6 +12,7 @@ class App extends React.Component {
     this.state = {
       city: '',
       cityData: [],
+      mapUrl: '',
       error: false,
       errorMessage: ''
     }
@@ -25,11 +26,18 @@ class App extends React.Component {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`
 
       let cityDataFromAxios = await axios.get(url);
+
+      
       console.log(cityDataFromAxios);
       this.setState({
         cityData: cityDataFromAxios.data[0],
-        error: false
+        error: false,
+        mapUrl: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`
       })
+      
+      // `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.cityDataFromAxios.data[0].lat},${this.state.cityDataFromAxios.data[0].lon}&zoom=10`
+
+      
 
     } catch (error) {
       this.setState({
@@ -71,6 +79,7 @@ class App extends React.Component {
                 <Card.Text>{this.state.cityData.lat}</Card.Text>
                 <Card.Text>{this.state.cityData.lon}</Card.Text>
               </Card.Body>
+              <Card.Img variant="bottom" src={this.state.mapUrl} />
             </Card>
 
         }
