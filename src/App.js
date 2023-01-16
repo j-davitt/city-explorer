@@ -27,17 +27,16 @@ class App extends React.Component {
 
       let cityDataFromAxios = await axios.get(url);
 
-      
+
       console.log(cityDataFromAxios);
       this.setState({
         cityData: cityDataFromAxios.data[0],
         error: false,
-        mapUrl: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`
+        mapUrl: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${cityDataFromAxios.data[0].lat},${cityDataFromAxios.data[0].lon}&zoom=10`
       })
-      
-      // `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.cityDataFromAxios.data[0].lat},${this.state.cityDataFromAxios.data[0].lon}&zoom=10`
 
-      
+
+
 
     } catch (error) {
       this.setState({
@@ -73,11 +72,11 @@ class App extends React.Component {
         {
           this.state.error
             ? <p>{this.state.errorMessage}</p>
-            : <Card>
+            : <Card style={{ width: '60%' }}>
               <Card.Body>
-                <Card.Title>{this.state.cityData.display_name}</Card.Title>
-                <Card.Text>{this.state.cityData.lat}</Card.Text>
-                <Card.Text>{this.state.cityData.lon}</Card.Text>
+                <Card.Title>Location: {this.state.cityData.display_name}</Card.Title>
+                <Card.Text>Lat: {this.state.cityData.lat}</Card.Text>
+                <Card.Text>Lon: {this.state.cityData.lon}</Card.Text>
               </Card.Body>
               <Card.Img variant="bottom" src={this.state.mapUrl} />
             </Card>
