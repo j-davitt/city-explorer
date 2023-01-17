@@ -39,11 +39,20 @@
 
 .card {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  justify-content: space-around;
+  background-color: rgb(163, 247, 233);
+}
+
+.card-body{
+  background-color: rgb(163, 247, 233);
 }
 
 #root {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
 }
