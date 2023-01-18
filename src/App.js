@@ -48,13 +48,13 @@ class App extends React.Component {
     }
   }
 
-  handleGetWeather = (e) => {
+  handleInput = (e) => {
     this.setState({
       city: e.target.value
     })
   }
 
-  handleSubmit = async (e) => {
+  handleGetWeather = async (e) => {
     // e.preventDefault();
     // TODO: BUILD OUT FUNCTIONALITY TO CALL MY SERVER TO GET DATA
     try {
