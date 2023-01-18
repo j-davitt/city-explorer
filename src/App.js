@@ -24,7 +24,7 @@ class App extends React.Component {
 
   getCityData = async (e) => {
     e.preventDefault();
-    this.handleSubmit();
+    this.handleGetWeather();
 
     try {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`
@@ -48,7 +48,7 @@ class App extends React.Component {
     }
   }
 
-  handleInput = (e) => {
+  handleGetWeather = (e) => {
     this.setState({
       city: e.target.value
     })
@@ -115,8 +115,6 @@ class App extends React.Component {
       </>
     )
   }
-
-
 
 }
 
