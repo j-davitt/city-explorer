@@ -1,6 +1,5 @@
 import React from 'react';
 import Weather from './Weather';
-import Card from 'react-bootstrap/Card';
 
 
 class Main extends React.Component {
