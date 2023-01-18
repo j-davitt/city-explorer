@@ -18,20 +18,22 @@ class App extends React.Component {
       errorMessage: '',
       weatherData: [],
       weatherError: true,
+      movieData: [],
+      movieError: true,
       cityChosen: false
     }
   }
 
   getCityData = async (e) => {
     e.preventDefault();
-    
+
     try {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`
-      
+
       let cityDataFromAxios = await axios.get(url);
       let lat = cityDataFromAxios.data[0].lat;
       let lon = cityDataFromAxios.data[0].lon;
-      
+
       this.handleGetWeather(lat, lon);
 
       console.log(cityDataFromAxios.data);
@@ -83,6 +85,25 @@ class App extends React.Component {
     }
   }
 
+  handleGetMovies = async () => {
+    try {
+
+      let url = `${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.city}`
+
+      let movieDataFromAxios = await axios.get(url);
+
+      console.log(movieDataFromAxios.data);
+
+      this.setState({
+        movieData: movieDataFromAxios.data,
+        movieError: false
+      })
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   render() {
     return (
       <>
@@ -111,6 +132,7 @@ class App extends React.Component {
             ? null
             : <Main
               weatherData={this.state.weatherData}
+              movieData={this.state.movieData}
             />
         }
 

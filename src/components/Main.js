@@ -1,5 +1,6 @@
 import React from 'react';
 import Weather from './Weather';
+import Movies from './Movies';
 
 
 class Main extends React.Component {
@@ -20,6 +21,17 @@ class Main extends React.Component {
             />
           )
         })}
+           {this.props.movieData.map((e, idx) => {
+          return (
+            <Movies
+              title={e.title}
+              overview={e.overview}
+              key={idx}
+
+            />
+          )
+        })}
+
 
 
       </>
