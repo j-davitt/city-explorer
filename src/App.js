@@ -24,15 +24,17 @@ class App extends React.Component {
 
   getCityData = async (e) => {
     e.preventDefault();
-    this.handleGetWeather();
-
+    
     try {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`
-
+      
       let cityDataFromAxios = await axios.get(url);
+      let lat = cityDataFromAxios.data[0].lat;
+      let lon = cityDataFromAxios.data[0].lon;
+      
+      this.handleGetWeather(lat, lon);
 
-
-      console.log(cityDataFromAxios);
+      console.log(cityDataFromAxios.data);
       this.setState({
         cityData: cityDataFromAxios.data[0],
         error: false,
@@ -54,22 +56,22 @@ class App extends React.Component {
     })
   }
 
-  handleGetWeather = async (e) => {
+  handleGetWeather = async (lat, lon) => {
     // e.preventDefault();
     // TODO: BUILD OUT FUNCTIONALITY TO CALL MY SERVER TO GET DATA
     try {
       // TODO: BUILD OUT URL FOR AXIOS TO HIT
-      let url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}&lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}`
+      let url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}&lat=${lat}&lon=${lon}`
 
-      let weatherData = await axios.get(url);
+      let weatherDataFromAxios = await axios.get(url);
 
       // TODO: SET STATE WITH THE INFORMATION COMING BACK FROM AXIOS
       this.setState({
-        weatherData: weatherData.data,
+        weatherData: weatherDataFromAxios.data,
         weatherError: false
       })
 
-      console.log(weatherData);
+      console.log(weatherDataFromAxios.data);
 
 
 
