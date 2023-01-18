@@ -21,18 +21,18 @@ class Main extends React.Component {
             />
           )
         })}
-           {this.props.movieData.map((e, idx) => {
+
+        {this.props.movieData.map((e, idx) => {
           return (
             <Movies
               title={e.title}
               overview={e.overview}
+              poster={e.poster}
               key={idx}
 
             />
           )
         })}
-
-
 
       </>
     )

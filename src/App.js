@@ -26,6 +26,7 @@ class App extends React.Component {
 
   getCityData = async (e) => {
     e.preventDefault();
+    this.handleGetMovies();
 
     try {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`
