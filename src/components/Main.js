@@ -9,18 +9,9 @@ class Main extends React.Component {
     return (
       <>
 
-        {this.props.weatherData.map((e, idx) => {
-          return (
-            <Weather
-              date={e.date}
-              description={e.description}
-              lowTemp={e.lowTemp}
-              highTemp={e.maxTemp}
-              key={idx}
-
-            />
-          )
-        })}
+        <Weather
+          weatherData={this.props.weatherData}
+        />
 
         {this.props.movieData.map((e, idx) => {
           return (
